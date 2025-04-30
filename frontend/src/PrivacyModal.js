@@ -1,5 +1,5 @@
 import React from "react";
-import "./PrivacyModal.css"; // we'll create this too
+import "./PrivacyModal.css";
 
 function PrivacyModal({ onClose }) {
   return (

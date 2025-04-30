@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Dashboard.css';
 import {BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell} from 'recharts';
-import {featureNameMapping} from './featureNameMapping'; // Adjust path if needed
+import {featureNameMapping} from './featureNameMapping';
 
 function Dashboard() {
     const [patients, setPatients] = useState([]);

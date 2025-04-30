@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaUserPlus, FaClipboardList } from 'react-icons/fa';
-import './Sidebar.css'; // <-- make sure you have this CSS (I'll give it to you too)
+import './Sidebar.css';
 
 function Sidebar() {
   return (

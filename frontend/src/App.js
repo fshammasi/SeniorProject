@@ -7,7 +7,7 @@ import ResultPage from "./ResultPage";
 import ViewPatient from "./ViewPatient";
 import { useState, useEffect } from "react";
 import PrivacyModal from "./PrivacyModal";
-import Footer from "./Footer"; //  Import Footer
+import Footer from "./Footer";
 
 function App() {
   const [result, setResult] = useState(null);

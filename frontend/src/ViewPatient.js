@@ -4,7 +4,7 @@ import {jsPDF} from "jspdf";
 import autoTable from "jspdf-autotable";
 import "./ResultPage.css";
 import {featureNameMapping} from "./featureNameMapping";
-import {customFeatureOrder} from "./customFeatureOrder"; //  Import your order
+import {customFeatureOrder} from "./customFeatureOrder";
 
 function ViewPatient() {
     const {id} = useParams();
