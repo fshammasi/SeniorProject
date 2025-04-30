@@ -1,8 +1,6 @@
-# Breast Cancer Recurrence Prediction Tool 🧠🎗️
+# Breast Cancer Recurrence Prediction Tool 🎗️
 
 This is a full-stack web application built with **React (frontend)** and **Flask (backend)** to predict the risk of breast cancer recurrence using a trained machine learning model.
-
-## 📁 Project Structure
 
 
 ## 🚀 How to Run the Project
