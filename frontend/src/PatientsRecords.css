@@ -1,0 +1,211 @@
+/* PatientsRecords.css */
+
+
+.patients-title {
+  text-align: center;
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: black;
+}
+h1 {
+  text-align: center;
+  color: black;
+  font-weight: normal;
+}
+.container {
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+.patients-buttons {
+  margin-bottom: 0px;
+  position: relative; /* Keep dropdown anchored */
+}
+
+/* Flex container for the filter + search + refresh */
+.filter-refresh-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 0;
+  background-color: #fcafc7;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Filter and Refresh Buttons */
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcafc7;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  padding: 8px 12px;
+  width: 160px;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 10px ;
+}
+
+.refresh-button {
+  background-color: #fcafc7;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  padding: 8px 12px;
+  width: 160px;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  flex-shrink: 0;
+  margin-right: 10px ;
+}
+
+.search-bar {
+  width: 650px;
+  padding: 8px;
+  border-radius: 0 0 8px 8px;
+  border: #fcafc7;
+  height: 30px;
+}
+
+.refresh-button:hover,
+.filter-button:hover {
+  background-color: #fdd0d3;
+}
+
+/* Dropdown with animation */
+.filter-dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 200px;
+}
+
+.filter-dropdown.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.filter-dropdown button {
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.filter-dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+.filter-dropdown .clear-filter {
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.filter-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Patients Table */
+.patients-table {
+  width: 100%;
+  margin-top: 0;
+  border-collapse: separate; /* ✅ Fixed here */
+  border-spacing: 0;          /* ✅ Added */
+  background: white;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+  overflow: hidden; /* Important to prevent inner borders from breaking the curve */
+}
+
+.patients-table th {
+  background-color: #fcafc7;
+  color: white;
+}
+
+.patients-table th, .patients-table td {
+  border: none;
+  padding: 8px;
+  text-align: left;
+}
+
+/* ✅ Bottom corners rounded */
+.patients-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.patients-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+.patients-table button {
+  background-color: darkgray;
+  color: white;
+  font-weight: lighter;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 5px;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+  display: inline-block;
+}
+
+.patients-table button:hover {
+  background-color: #fcafc7;
+}
+
+/* Custom width adjustments */
+.patients-table th:nth-child(4),
+.patients-table td:nth-child(4) {
+  width: 370px;
+  text-align: center;
+}
+
+.patients-table th:nth-child(3),
+.patients-table td:nth-child(3) {
+  width: 210px;
+  text-align: center;
+}
+
+.patients-table th:nth-child(2),
+.patients-table td:nth-child(2) {
+  text-align: center;
+}
+
+/* High Risk Row Highlight */
+.high-risk-row {
+  background-color: #ffe6e6;
+}
+/* Elegant table card effect */
+
+.patients-table tr:hover {
+  background-color: #fef4f5; /* Very light pink */
+}

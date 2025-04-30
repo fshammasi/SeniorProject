@@ -1,0 +1,132 @@
+.dashboard-logo {
+  width: 100px;   /* 👈 you can adjust this size */
+  height: 100px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+/* Dashboard.css */
+
+.dashboard-container {
+  padding: 0 30px 0 0;
+  background-color: #ffffff;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.dashboard-title {
+  font-size: 30px;
+  font-weight: normal;
+  color: black;
+}
+
+/* Top Cards Layout */
+.dashboard-top {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Card Style */
+.dashboard-card {
+  background: white;
+  padding: 5px;
+  flex: 1;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* High Risk Table */
+.high-risk-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.high-risk-table th {
+  background-color: #fcafc7;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.high-risk-table td {
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Info Cards Section */
+.info-cards {
+  display: flex;
+  gap: 150px;
+  margin: 30px 0;
+}
+
+.info-card {
+  flex: 1;
+  background: darkgray;
+  color: white;
+  padding: 0px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.info-card p {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Specific Colors */
+.info-card.high-risk {
+  background: red; /* Red */
+}
+
+.info-card.low-risk {
+  background: green; /* Green */
+}
+
+/* Bottom (Global SHAP Chart) */
+.dashboard-bottom {
+  margin-top: 20px;
+}
+
+/* --- Dashboard Fine Tuning --- */
+
+/* Section Titles inside cards */
+.dashboard-card h2 {
+  padding: 5px 0 0 20px;
+  font-size: 20px; /* default */
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Recent Patient BarChart Label (the REF-xxxx - Feature name) */
+.dashboard-card .recharts-yAxis .recharts-cartesian-axis-tick tspan {
+  font-size: 13px; /* smaller and neater */
+  fill: #666; /* slight gray */
+}
+
+/* Adjust the chart container height */
+.dashboard-card .recharts-responsive-container {
+  height: 200px; /* slightly smaller charts */
+}
+.no-patients-message {
+  text-align: center;
+  color: darkgray;
+  margin-top: 30px;
+  font-size: 14px;
+}
+

@@ -1,0 +1,144 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+/* Main container */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  color: black;
+  font-weight: normal;
+}
+
+/* Form container */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Form Group (one row) */
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 15px 0;
+}
+
+/* Label */
+.form-label {
+  flex: 1;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  margin-right: 20px;
+}
+
+/* Input / Select */
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+select {
+  flex: 2;
+}
+
+/* Tooltip */
+.tooltip-icon {
+  margin-left: 5px;
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* Radio Buttons */
+.radio-buttons-wrapper {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.radio-buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button[type="submit"] {
+  background-color: #ff79b4;
+  color: white;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  background-color: #fcafc7;
+}
+
+button[type="submit"]:active {
+  background-color: #fdd0d3;
+  transform: scale(0.98);
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Results Page */
+.results {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+  text-align: left;
+
+}

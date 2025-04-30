@@ -1,0 +1,44 @@
+/* Sidebar.css */
+.sidebar {
+  width: 100px;
+  height: 100vh;
+  background-color: #fcafc7; /* soft pink */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 0 10px 10px 0; /* Slightly round only on right side */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.sidebar-link {
+  margin-bottom: 60px;
+  width: 100%;
+}
+
+.sidebar-link a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0; /* 🔥 more clickable area */
+}
+
+.sidebar-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+/* Hover effect */
+.sidebar-link a:hover {
+  background-color: #fdd0d3;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}

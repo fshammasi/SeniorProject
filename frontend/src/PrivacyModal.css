@@ -1,0 +1,45 @@
+.privacy-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.privacy-modal {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 500px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.privacy-modal h2 {
+  margin-bottom: 20px;
+}
+
+.privacy-modal p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.privacy-modal button {
+  background-color: #fcafc7;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.privacy-modal button:hover {
+  background-color: #e698a8;
+}
