@@ -25,6 +25,6 @@ npm start
 
 This will automatically:
 - Launch the React frontend at `http://localhost:3000`
-- Launch the Flask backend at `http://localhost:5050` (through concurrently)
+- Launch the Flask backend at `http://localhost:5050` (through `concurrently`)
 
 ---
