@@ -1,4 +1,4 @@
-// ✅ New mappings.js (fully rebuilt, accurate from your latest Jupyter notebook)
+//  New mappings.js (fully rebuilt, accurate from your latest Jupyter notebook)
 
 export const mappings = {
   "Primary Site": {

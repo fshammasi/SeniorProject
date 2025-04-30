@@ -100,7 +100,7 @@ function Dashboard() {
                                                     boxShadow: "0px 2px 8px rgba(0,0,0,0.1)"
                                                 }}>
                                                     <p style={{margin: 0, fontWeight: "bold"}}>
-                                                        {label.split(' - ')[1]} {/* ✅ Just the feature name after the dash */}
+                                                        {label.split(' - ')[1]} {/*  Just the feature name after the dash */}
                                                     </p>
                                                     <p style={{margin: 0}}>
                                                         {`${payload[0].value}% Impact`}
@@ -215,7 +215,7 @@ function Dashboard() {
                                                 padding: "5px",
                                                 width: "120px",
                                                 textAlign: "center",
-                                                color: "#000", // ✅ now this will work!
+                                                color: "#000", //  now this will work!
                                                 boxShadow: "0px 2px 8px rgba(0,0,0,0.1)"
                                             }}>
                                                 <p style={{margin: 0, fontWeight: "bold"}}>{label}</p>

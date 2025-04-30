@@ -130,7 +130,7 @@ function ResultPage({result, setResult}) {
     const handleSavePatient = async () => {
         if (isSaving || saved) return; // ⛔ Block fast double click
 
-        setSaved(true); // ✅ Immediately lock the Save button
+        setSaved(true); //  Immediately lock the Save button
         setIsSaving(true); // ⏳ Show Saving...
 
         try {
@@ -161,7 +161,7 @@ function ResultPage({result, setResult}) {
             console.error("Save Error:", error);
             alert("❌ Something went wrong while saving.");
         } finally {
-            setIsSaving(false); // ✅ Always stop loading spinner
+            setIsSaving(false); //  Always stop loading spinner
         }
     };
 

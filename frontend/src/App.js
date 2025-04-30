@@ -7,7 +7,7 @@ import ResultPage from "./ResultPage";
 import ViewPatient from "./ViewPatient";
 import { useState, useEffect } from "react";
 import PrivacyModal from "./PrivacyModal";
-import Footer from "./Footer"; // ✅ Import Footer
+import Footer from "./Footer"; //  Import Footer
 
 function App() {
   const [result, setResult] = useState(null);
@@ -50,7 +50,7 @@ function App() {
         </div>
 
         {/* Footer Always at Bottom */}
-        <Footer onPrivacyClick={handlePrivacyClick} /> {/* ✅ Now will appear */}
+        <Footer onPrivacyClick={handlePrivacyClick} /> {/*  Now will appear */}
       </div>
     </Router>
   );

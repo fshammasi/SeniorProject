@@ -13,7 +13,7 @@ CORS(app)
 
 # 🔁 Load trained pipeline (includes fitted XGBoost model)
 pipeline = joblib.load("final_model_pipeline.pkl")
-model = pipeline.named_steps['xgb']  # ✅ Use fitted model directly from pipeline
+model = pipeline.named_steps['xgb']  #  Use fitted model directly from pipeline
 
 # 📥 Load best threshold
 with open("best_threshold.txt", "r") as f:
@@ -23,7 +23,7 @@ with open("best_threshold.txt", "r") as f:
 X_train = pd.read_csv("X_train_shap.csv")
 
 # ⚡ SHAP explainer (tree-optimized)
-explainer = shap.TreeExplainer(model)  # ✅ optimized for XGBoost
+explainer = shap.TreeExplainer(model)  #  optimized for XGBoost
 
 # 📊 Precompute global SHAP values (once)
 shap_vals_global = explainer(X_train)
@@ -95,7 +95,7 @@ def save_patient():
         ''', (today,))
         count_today = cursor.fetchone()[0] + 1  # Start counting from 1
 
-        # ✅ Create a truly unique Patient Reference for today
+        #  Create a truly unique Patient Reference for today
         while True:
             patient_reference = f"REF-{today}-{str(count_today).zfill(3)}"
             # 🔎 Check if this patient_reference already exists
@@ -222,7 +222,7 @@ def update_notes(patient_id):
 
 
 # ------------------- /patientsid ------------------- #
-# ✅ CORRECT VERSION
+#  CORRECT VERSION
 @app.route('/patientsid/<int:patient_id>', methods=['GET'])
 def get_patient_by_id(patient_id):
     try:

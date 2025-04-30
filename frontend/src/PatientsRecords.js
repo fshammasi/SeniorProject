@@ -121,7 +121,7 @@ function PatientsRecords() {
                     </div>
                 </div>
 
-                {/* ✅ Table inside the container */}
+                {/*  Table inside the container */}
                 {filteredPatients.length === 0 ? (
                     <p>No patients saved yet.</p>
                 ) : (

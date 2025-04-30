@@ -136,8 +136,8 @@ h1 {
 .patients-table {
   width: 100%;
   margin-top: 0;
-  border-collapse: separate; /* ✅ Fixed here */
-  border-spacing: 0;          /* ✅ Added */
+  border-collapse: separate; /*  Fixed here */
+  border-spacing: 0;          /*  Added */
   background: white;
   border-radius: 0 0 12px 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
@@ -155,7 +155,7 @@ h1 {
   text-align: left;
 }
 
-/* ✅ Bottom corners rounded */
+/*  Bottom corners rounded */
 .patients-table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 12px;
 }
