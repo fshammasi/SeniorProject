@@ -13,7 +13,7 @@ function PrivacyModal({ onClose }) {
           The data will remain <strong>anonymous</strong> at all times, ensuring privacy and confidentiality. We are committed to safeguarding the information and adhere to strict data protection standards.
         </p>
         <p>
-          By continuing to use this website, you consent to the use of your data as described in our <strong>Privacy Policy</strong>.
+          By continuing to use this website, you consent to the use of patient data as described in our <strong>Privacy Policy</strong>.
         </p>
         <button onClick={onClose}>I Agree</button>
       </div>
