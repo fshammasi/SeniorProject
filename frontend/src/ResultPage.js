@@ -178,7 +178,7 @@ function ResultPage({result, setResult}) {
 
     return (
         <div className="result-container">
-            <h1 className="result-title">Risk Recurrence Score</h1>
+            <h1 className="result-title">Risk Recurrence Report</h1>
 
             <div className="patient-reference">
                 <strong>Patient Reference
