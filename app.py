@@ -5,7 +5,7 @@ import pandas as pd
 import shap
 import numpy as np
 import sqlite3
-import os
+
 
 # ------------------- Setup ------------------- #
 app = Flask(__name__)
