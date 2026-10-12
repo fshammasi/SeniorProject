@@ -30,6 +30,12 @@ Every run then:
 
 Press **Ctrl+C** to stop both.
 
+### Demo data
+The repository includes `demo_patients.db` with 17 test patients (not real people).
+On the first start, the app copies it to `patients.db`, which is where new patients are saved.
+`patients.db` is not tracked by git. To start over with the demo patients, delete `patients.db`
+and start the app again.
+
 You can also still start it the old way, from the `frontend` folder on macOS / Linux:
 ```bash
 cd frontend
