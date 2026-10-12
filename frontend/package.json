@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run react-start\" \"cd .. && flask run --port=5050\"",
+    "start": "cd .. && python3 run.py",
     "react-start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

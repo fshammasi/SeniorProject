@@ -5,26 +5,37 @@ This is a full-stack web application built with **React (frontend)** and **Flask
 
 ## 🚀 How to Run the Project
 
-Make sure you have **Node.js**, **Python**, and **Flask** installed.
+### Requirements (install once)
+- **Python 3.10 – 3.13** (3.12 recommended) — https://www.python.org/downloads/
+- **Node.js** (LTS version) — https://nodejs.org/
 
-### 1. Install Node dependencies
+> The trained model was saved with scikit-learn 1.6.1 and XGBoost 2.1.4, which don't support
+> older or newer Python versions. On a Mac, the built-in `python3` is usually 3.9, which is too old.
+
+### Start the application
+From the project folder, run:
+
+```bash
+python3 run.py      # macOS / Linux
+python run.py       # Windows
+```
+
+The **first run** sets everything up automatically (this takes a few minutes):
+- creates a Python environment in `.venv` and installs the packages from `requirements.txt`
+- installs the frontend packages in `frontend/node_modules`
+
+Every run then:
+- starts the Flask backend at `http://localhost:5050` (and waits for the model to load)
+- starts the React frontend at `http://localhost:3000` and opens it in your browser
+
+Press **Ctrl+C** to stop both.
+
+You can also still start it the old way, from the `frontend` folder on macOS / Linux:
 ```bash
 cd frontend
-npm install
-``` 
-
-### 2. Start the application
-Every time you want to start the project, just navigate to the `frontend` folder:
-```bash
-cd frontend
-``` 
-and run:
-```bash
 npm start
-``` 
+```
 
-This will automatically:
-- Launch the React frontend at `http://localhost:3000`
-- Launch the Flask backend at `http://localhost:5050` (through `concurrently`)
-
----
+### Troubleshooting
+- **"Port 5050 is already in use"** — the app is already running in another terminal window. Stop it there first.
+- **Packages look broken** — delete the `.venv` folder and/or `frontend/node_modules` and run `run.py` again to reinstall.

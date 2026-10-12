@@ -1,0 +1,10 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node (frontend packages are installed by run.py / npm install)
+node_modules/
+
+# macOS
+.DS_Store

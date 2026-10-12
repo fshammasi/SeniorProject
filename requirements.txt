@@ -1,0 +1,12 @@
+# Python packages for the Flask backend (app.py).
+# The model files were saved with scikit-learn 1.6.1 and XGBoost 2.1.4,
+# so those versions are pinned to make sure the model loads the same way.
+flask>=2.3,<4
+flask-cors>=4.0
+joblib>=1.3
+numpy>=2.0,<3
+pandas>=2.2,<3
+scikit-learn==1.6.1
+imbalanced-learn==0.13.0
+xgboost==2.1.4
+shap>=0.46
