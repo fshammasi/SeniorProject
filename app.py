@@ -5,8 +5,6 @@ import pandas as pd
 import shap
 import numpy as np
 import sqlite3
-import os
-import shutil
 
 
 # ------------------- Setup ------------------- #
@@ -153,11 +151,6 @@ def get_feature_names():
 
 # ------------------- Initialize Database ------------------- #
 def init_db():
-    # First run on a new computer: start from the demo (test) patients
-    if not os.path.exists('patients.db') and os.path.exists('demo_patients.db'):
-        shutil.copyfile('demo_patients.db', 'patients.db')
-        print("Created patients.db from demo_patients.db (test patients)")
-
     conn = sqlite3.connect('patients.db')
     cursor = conn.cursor()
     # Force creating the table if it doesn't exist

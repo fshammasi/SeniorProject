@@ -49,7 +49,7 @@ The **first run** sets everything up automatically (this takes a few minutes):
 - downloads Python 3.12 if needed
 - creates a Python environment in `.venv` and installs the packages from `requirements.txt`
 - installs the frontend packages in `frontend/node_modules`
-- creates the patient database from the demo data
+- creates an empty patient database (`patients.db`)
 
 Every run then:
 - starts the Flask backend at `http://localhost:5050` and waits for the model to load
@@ -63,11 +63,10 @@ cd frontend
 npm start
 ```
 
-### Demo data
-The repository includes `demo_patients.db` with 17 test patients (not real people).
-On the first start, the app copies it to `patients.db`, where new patients are saved.
-`patients.db` is not tracked by git, so your own records stay on your computer.
-To start over with the demo patients, delete `patients.db` and start the app again.
+### Patient data
+Saved patients are stored in `patients.db` in the project folder. This file is not tracked by git,
+so each computer keeps its own records and they are never uploaded to GitHub.
+To start over with an empty list, stop the app, delete `patients.db`, and start the app again.
 
 
 ## 🧠 How the Prediction Works
@@ -97,9 +96,8 @@ SeniorProject/
 ├── final_model_pipeline.pkl  # Trained model pipeline (SMOTETomek + XGBoost)
 ├── best_threshold.txt        # Probability threshold for "High Risk"
 ├── X_train_shap.csv          # Training features, used for SHAP and the form's feature list
-├── demo_patients.db          # 17 test patients, copied to patients.db on first start
 ├── xgb_model.json            # Backup: the same XGBoost model in XGBoost's portable JSON format
-├── sample.json               # Example /predict input (demo patient REF-20250429-014)
+├── sample.json               # Example /predict input (a High Risk test patient)
 └── frontend/                 # React app
     ├── package.json
     └── src/
