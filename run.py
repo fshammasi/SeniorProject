@@ -5,7 +5,9 @@ One-command launcher for the Breast Cancer Recurrence Prediction Tool.
     Windows:        python run.py   (or: py run.py)
 
 On the first run this sets everything up (Python packages in .venv,
-Node packages in frontend/node_modules). After that it just starts:
+Node packages in frontend/node_modules). If this computer doesn't have
+Python 3.10 - 3.13, it downloads Python 3.12 automatically (using uv).
+After that it just starts:
   - the Flask backend  at http://localhost:5050
   - the React frontend at http://localhost:3000 (opens in your browser)
 
@@ -25,6 +27,7 @@ import urllib.request
 ROOT = os.path.dirname(os.path.abspath(__file__))
 FRONTEND = os.path.join(ROOT, "frontend")
 VENV = os.path.join(ROOT, ".venv")
+TOOLS = os.path.join(ROOT, ".tools")  # only used if uv has to be installed
 REQUIREMENTS = os.path.join(ROOT, "requirements.txt")
 BACKEND_PORT = 5050
 
@@ -113,6 +116,30 @@ def find_supported_python():
     return None
 
 
+def find_or_install_uv():
+    """Return the path to uv (https://docs.astral.sh/uv/), installing it into .tools if needed."""
+    uv = shutil.which("uv")
+    if uv:
+        return uv
+
+    # Install uv with pip into a small separate environment, using whatever Python is running this script
+    tools_uv = os.path.join(TOOLS, "Scripts", "uv.exe") if IS_WINDOWS else os.path.join(TOOLS, "bin", "uv")
+    if not os.path.exists(tools_uv):
+        step("Installing uv (a tool that downloads the right Python version)")
+        tools_python = os.path.join(TOOLS, "Scripts", "python.exe") if IS_WINDOWS else os.path.join(TOOLS, "bin", "python")
+        try:
+            subprocess.run([sys.executable, "-m", "venv", TOOLS], check=True)
+            subprocess.run([tools_python, "-m", "pip", "install", "--quiet", "uv"], check=True)
+        except (subprocess.CalledProcessError, OSError):
+            shutil.rmtree(TOOLS, ignore_errors=True)
+            versions = ", ".join(f"{a}.{b}" for a, b in sorted(SUPPORTED_PYTHONS))
+            fail(
+                f"This project needs Python {versions}, and it could not be installed automatically.\n"
+                "    Install Python 3.12 from https://www.python.org/downloads/ and run this again."
+            )
+    return tools_uv
+
+
 def venv_python():
     if IS_WINDOWS:
         return os.path.join(VENV, "Scripts", "python.exe")
@@ -127,15 +154,14 @@ def setup_python():
 
     if not os.path.exists(venv_python()):
         python = find_supported_python()
-        if python is None:
-            versions = ", ".join(f"{a}.{b}" for a, b in sorted(SUPPORTED_PYTHONS))
-            fail(
-                f"This project needs Python {versions}.\n"
-                f"    You are running Python {sys.version.split()[0]}.\n"
-                "    Install Python 3.12 from https://www.python.org/downloads/ and run this again."
-            )
-        step(f"Creating Python environment (.venv) with {' '.join(python)}")
-        subprocess.run(python + ["-m", "venv", VENV], check=True)
+        if python is not None:
+            step(f"Creating Python environment (.venv) with {' '.join(python)}")
+            subprocess.run(python + ["-m", "venv", VENV], check=True)
+        else:
+            # No suitable Python on this computer: let uv download Python 3.12
+            # (just for this user, no admin rights needed) and build .venv with it.
+            step(f"Python {sys.version.split()[0]} can't run the model - downloading Python 3.12 (first run only)")
+            subprocess.run([find_or_install_uv(), "venv", "--seed", "--python", "3.12", VENV], check=True)
 
     stamp = os.path.join(VENV, ".requirements-hash")
     current = file_hash(REQUIREMENTS)
@@ -244,6 +270,14 @@ def main():
 
     if port_in_use(BACKEND_PORT):
         fail(f"Port {BACKEND_PORT} is already in use - is the app already running in another window?")
+
+    # Closing the terminal window (SIGHUP) or a plain `kill` (SIGTERM) should stop
+    # both servers too, just like Ctrl+C - otherwise they keep running in the background.
+    def stop_on_signal(signum, frame):
+        raise KeyboardInterrupt
+    for name in ("SIGTERM", "SIGHUP"):
+        if hasattr(signal, name):
+            signal.signal(getattr(signal, name), stop_on_signal)
 
     backend = frontend = None
     try:
