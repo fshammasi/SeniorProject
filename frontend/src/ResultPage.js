@@ -74,7 +74,7 @@ function ResultPage({result, setResult}) {
                 const rawImpact = parseFloat(item.impact.replace(/[^0-9.-]/g, ""));
                 const formattedImpact = isNaN(rawImpact)
                     ? "0.0%"
-                    : `${item.direction === "+" ? "+ " : "- "}${Math.abs(rawImpact).toFixed(1)}%`;
+                    : `${item.direction === "+" ? "+ " : "- "}${Math.abs(rawImpact).toFixed(2)}%`;
 
 
                 return {
@@ -130,8 +130,7 @@ function ResultPage({result, setResult}) {
     const handleSavePatient = async () => {
         if (isSaving || saved) return; // ⛔ Block fast double click
 
-        setSaved(true); //  Immediately lock the Save button
-        setIsSaving(true); // ⏳ Show Saving...
+        setIsSaving(true); // ⏳ Show Saving... (also locks the Save button)
 
         try {
             const notesTextarea = document.querySelector(".additional-notes textarea");
@@ -152,6 +151,7 @@ function ResultPage({result, setResult}) {
             const data = await response.json();
 
             if (response.ok) {
+                setSaved(true); // 🔒 Lock the Save button only after it really saved
                 alert("Patient saved successfully!");
                 setResult({...result, patient_reference: data.patient_reference});
             } else {
@@ -216,7 +216,7 @@ function ResultPage({result, setResult}) {
                             <td><strong>{displayLabel}</strong></td>
                             <td>{displayValue}</td>
                             <td style={{color: impactColor}}>
-                                {item.direction === "+" ? "+ " : "- "}{Math.abs(rawImpact).toFixed(1)}%
+                                {item.direction === "+" ? "+ " : "- "}{Math.abs(rawImpact).toFixed(2)}%
                             </td>
                         </tr>
                     );
@@ -229,6 +229,8 @@ function ResultPage({result, setResult}) {
                 The prediction is based on the patient's clinical data and contributing factors analyzed by the AI
                 model.
                 Please refer to the detailed breakdown of contributing factors for further insights.
+                Each impact shows how many percentage points that feature raised (+) or lowered (-) the
+                predicted probability, compared with the average patient.
             </p>
 
             <div className="risk-score">

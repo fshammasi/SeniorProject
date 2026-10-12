@@ -15,7 +15,10 @@ function ViewPatient() {
 
     useEffect(() => {
         fetch(`http://localhost:5050/patientsid/${id}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error(`Patient not found (${res.status})`);
+                return res.json();
+            })
             .then((data) => {
                 setPatient(data);
                 setNewNotes(data.notes || "");

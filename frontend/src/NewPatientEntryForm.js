@@ -22,6 +22,10 @@ function NewPatientEntryForm({ setResult }) {
         data.forEach((feature) => (initialForm[feature] = ""));
         setFeatures(data);
         setFormData(initialForm);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Could not connect to the server. Please make sure the backend is running and refresh the page.");
       });
   }, []);
 
@@ -55,14 +59,20 @@ function NewPatientEntryForm({ setResult }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(preparedData),
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || `Server error (${res.status})`);
+        }
+        return data;
+      })
       .then((data) => {
         setResult({ ...data, features_original: userEnteredData }); // 🧠 Store prediction + original readable
         navigate("/result");
       })
       .catch((err) => {
         console.error(err);
-        setError("Something went wrong. Please try again.");
+        setError("Something went wrong while predicting. Please try again." + (err.message ? ` (${err.message})` : ""));
         setLoading(false);
       });
   };

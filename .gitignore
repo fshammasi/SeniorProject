@@ -8,3 +8,6 @@ node_modules/
 
 # macOS
 .DS_Store
+
+# Patient records (created automatically by app.py) - keep them off GitHub
+patients.db

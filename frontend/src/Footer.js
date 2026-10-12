@@ -6,7 +6,7 @@ function Footer({ onPrivacyClick }) {
     <footer className="footer">
       <div className="footer-line"></div>
       <div className="footer-content">
-        <img src={process.env.PUBLIC_URL + "/logo.png"}  alt="Logo" className="footer-logo" />
+        <img src={process.env.PUBLIC_URL + "/Logo.png"}  alt="Logo" className="footer-logo" />
         <div className="footer-text">
           <p>Copyright © 2025, Fatemah Kamil Alshammasi, Shuhd Khaled Bin Ajaj, Raghad Ayadh Alharthi, Rouda Ibrahim Mansour, Haneen Ahmed Al-Ghzaly
 , All Rights Reserved</p>

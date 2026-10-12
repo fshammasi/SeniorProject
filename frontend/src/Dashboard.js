@@ -27,7 +27,7 @@ function Dashboard() {
             const mappedFeature = featureNameMapping[rawFeature] || rawFeature;
             return {
                 feature: mappedFeature,
-                mean_shap: parseFloat(item.mean_shap.toFixed(2))
+                mean_shap: parseFloat((item.mean_shap * 100).toFixed(2)) // probability -> percentage points
             };
         });
 
@@ -35,7 +35,7 @@ function Dashboard() {
         <div className="dashboard-container">
             {/* Header */}
             <div className="dashboard-header">
-                <img src={process.env.PUBLIC_URL + "/logo.png"} alt="Logo" className="dashboard-logo" />
+                <img src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo" className="dashboard-logo" />
                 <h1 className="dashboard-title">Breast Cancer Recurrence Overview</h1>
             </div>
 

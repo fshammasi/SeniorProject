@@ -9,7 +9,8 @@ import sqlite3
 
 # ------------------- Setup ------------------- #
 app = Flask(__name__)
-CORS(app)
+# Only our own React frontend may call the API (not any website open in the browser)
+CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])
 
 # 🔁 Load trained pipeline (includes fitted XGBoost model)
 pipeline = joblib.load("final_model_pipeline.pkl")
@@ -23,10 +24,14 @@ with open("best_threshold.txt", "r") as f:
 X_train = pd.read_csv("X_train_shap.csv")
 
 # ⚡ SHAP explainer (tree-optimized)
-explainer = shap.TreeExplainer(model)  #  optimized for XGBoost
+# model_output="probability" makes each SHAP value a change in recurrence probability,
+# so a patient's impacts add up to (probability - average probability).
+# Without it, TreeExplainer returns log-odds, which are not percentages.
+shap_background = shap.sample(X_train, 100, random_state=0)
+explainer = shap.TreeExplainer(model, data=shap_background, model_output="probability")
 
-# 📊 Precompute global SHAP values (once)
-shap_vals_global = explainer(X_train)
+# 📊 Precompute global SHAP values (once) on a fixed sample, to keep startup fast
+shap_vals_global = explainer(shap.sample(X_train, 500, random_state=0))
 mean_abs_shap_global = np.abs(shap_vals_global.values).mean(axis=0)
 
 global_summary = sorted([
@@ -40,7 +45,8 @@ global_summary = sorted([
 def predict():
     try:
         data = request.json
-        df_input = pd.DataFrame([data])
+        # Put the fields in the order the model was trained on
+        df_input = pd.DataFrame([data])[X_train.columns]
 
         # 🎯 Predict recurrence risk
         prob = pipeline.predict_proba(df_input)[0][1]
@@ -59,7 +65,7 @@ def predict():
                 'feature': feature,
                 'value': float(df_input.iloc[0, i]),
                 'direction': sign,
-                'impact': f'{direction} {float(abs(val * 100)):.1f}%'
+                'impact': f'{direction} {float(abs(val * 100)):.2f}%'  # percentage points of probability
             })
 
         return jsonify({
@@ -70,6 +76,12 @@ def predict():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+# SQLite stores CURRENT_TIMESTAMP in UTC as "YYYY-MM-DD HH:MM:SS".
+# Send it as ISO 8601 with "Z" so browsers convert it to the user's local time.
+def to_iso_utc(timestamp):
+    return timestamp.replace(' ', 'T') + 'Z' if timestamp else timestamp
 
 
 # ------------------- /save_patient ------------------- #
@@ -89,9 +101,10 @@ def save_patient():
         today = pd.Timestamp.now().strftime('%Y%m%d')
 
         # 🛠 Count how many patients already saved today (not overall)
+        # (timestamps are stored in UTC, so compare using local time like `today`)
         cursor.execute('''
             SELECT COUNT(*) FROM patients
-            WHERE strftime('%Y%m%d', timestamp) = ?
+            WHERE strftime('%Y%m%d', timestamp, 'localtime') = ?
         ''', (today,))
         count_today = cursor.fetchone()[0] + 1  # Start counting from 1
 
@@ -180,7 +193,7 @@ def get_patients():
                 'patient_reference': row[1],
                 'prediction': row[2],
                 'probability': row[3],
-                'timestamp': row[4]
+                'timestamp': to_iso_utc(row[4])
             })
 
         return jsonify(patients)
@@ -245,7 +258,7 @@ def get_patient_by_id(patient_id):
                 'features_json': row[4],
                 'impacts_json': row[5],
                 'notes': row[6],
-                'timestamp': row[7]
+                'timestamp': to_iso_utc(row[7])
             }
             return jsonify(patient)
         else:
@@ -278,7 +291,7 @@ def get_patients_dashboard():
                 'prediction': row[2],
                 'probability': row[3],
                 'impacts_json': row[4],
-                'timestamp': row[5]
+                'timestamp': to_iso_utc(row[5])
             })
 
         return jsonify(patients)
