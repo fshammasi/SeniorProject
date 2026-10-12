@@ -73,7 +73,10 @@ To start over with the demo patients, delete `patients.db` and start the app aga
 ## 🧠 How the Prediction Works
 
 - **Model:** an XGBoost classifier inside an imbalanced-learn pipeline, which used SMOTETomek
-  to balance the classes during training. The trained pipeline is in `final_model_pipeline.pkl`.
+  to balance the classes during training. The app loads the trained pipeline from
+  `final_model_pipeline.pkl`. `xgb_model.json` holds the same XGBoost model (identical
+  predictions) in a format that any XGBoost version can load, as a backup in case the `.pkl`
+  can't be loaded with future library versions.
 - **Input:** 36 features. Category answers are converted to numbers using the encodings in
   `frontend/src/mappings.js` (features ending in `_enc`).
 - **Decision threshold:** a patient is **High Risk** when the predicted probability is at least
@@ -95,8 +98,8 @@ SeniorProject/
 ├── best_threshold.txt        # Probability threshold for "High Risk"
 ├── X_train_shap.csv          # Training features, used for SHAP and the form's feature list
 ├── demo_patients.db          # 17 test patients, copied to patients.db on first start
-├── xgb_model.json            # XGBoost model exported as JSON (not used by the app)
-├── sample.json               # Older example input (doesn't match the current model)
+├── xgb_model.json            # Backup: the same XGBoost model in XGBoost's portable JSON format
+├── sample.json               # Example /predict input (demo patient REF-20250429-014)
 └── frontend/                 # React app
     ├── package.json
     └── src/
@@ -129,6 +132,11 @@ All endpoints are served at `http://localhost:5050`. Only the React frontend
 | PUT | `/update_notes/<id>` | Update a patient's notes |
 | DELETE | `/delete_patient/<id>` | Delete a patient |
 | GET | `/dashboard/patients` | Saved patients with impacts, for the dashboard |
+
+To try `/predict` without the website, send the example patient while the app is running:
+```bash
+curl -X POST http://localhost:5050/predict -H "Content-Type: application/json" -d @sample.json
+```
 
 Times are returned in UTC (ISO 8601, ending in `Z`). Reference numbers look like
 `REF-YYYYMMDD-NNN`, numbered per day in local time.
